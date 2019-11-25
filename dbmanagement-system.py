@@ -3,6 +3,7 @@
 import csv
 import os, errno
 import shutil
+import pandas as pd
 def create_dir(name):
     try:
         os.makedirs(name)
@@ -45,15 +46,37 @@ def main():
         for x in os.listdir('DB-management'):
             print (x)
         dbname=input("Enter DB name : ")
-        with open('DB-management/'+dbname+'/'+tbname+'.csv', 'wb') as f:
-            reader = csv.reader(f)
+        clname=input("Enter Colum  name : ")
 
-#    elif g=='4':
-#        print('drop table')
-    
+        with open('DB-management/'+dbname+'/'+tbname+'.csv', mode='w') as f:
+            write = csv.writer(f, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
+
+            write.writerow([clname])
 
 
+    elif g=='4':
+        for x in os.listdir('DB-management'):
+            print (x)
+        dbname=input("Enter DB name : ")
+        for x in os.listdir('DB-management/'+dbname):
+            print (x)
+        tbname=input("Enter Table name : ")
+        os.remove('DB-management/'+dbname+'/'+tbname+'.csv')
+    elif g=='5':
+        for x in os.listdir('DB-management'):
+            print (x)
+        dbname=input("Enter DB name : ")
+        for x in os.listdir('DB-management/'+dbname):
+            print (x)
+        tbname=input("Enter Table name : ")
+        clname=input("Enter Colum  name : ")
+#        with open('DB-management/'+dbname+'/'+tbname+'.csv','rb') as newFile:
+#        reader = csv.reader(open('DB-management/'+dbname+'/'+tbname+'.csv','r+'))
+#        writer = csv.writer(open('DB-management/'+dbname+'/'+tbname+'.csv', 'w'))
 
+        with open('DB-management/'+dbname+'/'+tbname+'.csv', 'a') as f:
+            write = csv.writer(f)
+            write.writerow([clname])
 if __name__ == '__main__':
     main()
 
